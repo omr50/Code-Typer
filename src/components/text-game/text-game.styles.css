@@ -1,0 +1,140 @@
+.quote-container {
+    padding: 10px 0px 0px 0px;
+    text-align: left;
+    font-size: 30px;
+    height: 50vh;
+    margin:50px;
+    border-radius: 10px;
+}
+
+.box-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button-container {
+    color:white;
+    border-radius: 10px;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    white-space: nowrap; 
+
+    background-color: black;
+    margin: 20px;
+}
+
+.options-item {
+    padding: 10px;
+    color: orange;
+    background-color: rgb(82, 80, 77);
+    border-radius: 10px 0px 0px 10px;
+}
+.button-item {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.button-item:hover {
+    background-color: white;
+    color: black;
+}
+
+.timer-item {
+    padding: 10px;
+}
+
+.reset-item {
+    padding: 10px;
+}
+
+.reset-item:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+.text-button {
+    background-color: #ff6600;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5rem;
+    width:170px;
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+  }
+  
+  .text-button:hover {
+    background-color: #fff;
+    color: #ff6600;
+  }
+
+  .text-button2 {
+    background-color: #b22222;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5rem;
+    width:170px;
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+  }
+  
+  .text-button2:hover {
+    background-color: #fff;
+    color: #b22222;
+  }
+
+
+.text-cursor {
+    width: 100px;
+    border-bottom: 2px solid green;
+    width: 40px !important;
+    color: yellow !important;
+    animation: cursor-blink 1s infinite;
+}
+
+/* .text-cursor {
+    display: inline-block;
+    position: absolute;
+    width: 2px;
+    height: 1.4em;
+    background-color: yellow;
+    margin-left: 2px;
+    margin-right: 50px;
+  } */
+
+   @keyframes cursor-blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .loading-bar {
+    color: white;
+    animation: load-blink 1s infinite;
+  }
+
+  @keyframes load-blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

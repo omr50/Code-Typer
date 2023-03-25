@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 const API_URL = 'https://api.api-ninjas.com/v1/quotes/?category=';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-console.log(API_KEY)
 const pyLibraries = [
     "import axios from 'axios'",
     "import moment from 'moment'",

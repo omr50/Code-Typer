@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const API_URL = 'https://api.api-ninjas.com/v1/quotes/?category=';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+console.log(API_KEY)
 
 const keys = {
     'Shift': '',
@@ -108,6 +109,7 @@ function TextGame() {
 
   const fetchQuote = () => {
     const category = categories[Math.floor(Math.random() * categories.length)];
+    console.log(API_URL+category, config)
     axios.get(API_URL+category, config)
       .then(response => {
         setQuote(response.data[0].quote)

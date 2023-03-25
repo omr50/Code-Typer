@@ -22,12 +22,20 @@ const Navigationbar = () => {
               <Nav.Link>Text</Nav.Link>
             </LinkContainer>
             <NavDropdown title="Languages" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">C++</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Python
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Javascript</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Java</NavDropdown.Item>
+              <LinkContainer to='/Cpp-game'>
+                <NavDropdown.Item href="#action/3.1">C++</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to='/Python-game'>
+                <NavDropdown.Item href="#action/3.2">
+                  Python
+                </NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to='/JS-game'>
+                <NavDropdown.Item href="#action/3.3">Javascript</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to='/Java-game'>
+                <NavDropdown.Item href="#action/3.3">Java</NavDropdown.Item>
+              </LinkContainer>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

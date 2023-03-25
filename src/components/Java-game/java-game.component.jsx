@@ -105,7 +105,7 @@ function JavaGame() {
       const funcName = wordsArray[Math.floor(Math.random() * 3) + 1];
       const var1 = wordsArray[Math.floor(Math.random() * 38) + 1];
       const var2 = wordsArray[Math.floor(Math.random() * 38) + 1];
-      const funcDefinition = `void ${funcName}(${arr[0]} ${var1}, ${arr[4]} ${var2}) { this.${varNames[0]} = ${var1}; this.${varNames[1]} = ${var2}; System.out.println(${varNames[0]} + ${varNames[1]}); } `;
+      const funcDefinition = `void ${funcName}(${arr[0]} ${var1}, ${arr[4]} ${var2}) { this.${varNames[0]} = ${var1}; this.${varNames[1]} = ${var2}; System.out.println(${varNames[0]} + ${varNames[1]}); } }`;
         const class1 = `${accessModifiers[Math.floor(Math.random() * 3)]} class ${wordsArray[Math.floor(Math.random() * 38) + 1]} {`
       // Generate some random code statements
       
@@ -194,7 +194,11 @@ useEffect(() => {
             setTimerStarted(true)
         }
       if (!(event.key in keys) && event.key.length === 1){
-        if (!(newLineIf.has(javaCode[userInput.length-1]))){
+        if (event.key === "'" || event.key === '/'){
+          event.preventDefault();
+          setUserInput(userInput + event.key)
+        }
+        else if (!(newLineIf.has(javaCode[userInput.length-1]))){
             const newInput = userInput + event.key;
             setUserInput(newInput);
         }
@@ -286,12 +290,14 @@ useEffect(() => {
         if (userInput[i] != javaCode[i])
             totalMistakes++;
     }
-    navigate(`/Python-game/${timer}/${javaCode.length}/${totalMistakes}`)
+    navigate(`/Java-game/${timer}/${javaCode.length}/${totalMistakes}`)
   }
 }
 
 export default JavaGame;
 
 // Java is pretty much done unless an error is discovered. TODO: make sure that
-// CPP has a proper reset. Then implement JS and we should be done.
+// CPP has a proper reset. Then implement JS and we should be done. ALSO make sure
+// that the end screen buttons take back to the proper language. Not to python
+// each time.
 // EXTRA YOU CAN ADD AN "unable to get accurate wpm" if the mistakes are a lot.

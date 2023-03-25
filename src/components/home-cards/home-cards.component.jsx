@@ -28,7 +28,7 @@ const HomeCards = () => {
             <ProgrammingCard image = {pythonDescription.image} description = {pythonDescription.description} link='/Python-game'/>
             <ProgrammingCard image = {javaDescription.image} description = {javaDescription.description} link='/Java-game'/>
             <ProgrammingCard image = {cppDescription.image} description = {cppDescription.description} link='/Cpp-game'/>
-            <ProgrammingCard image = {javascriptDescription.image} description = {javascriptDescription.description} link=''/>
+            <ProgrammingCard image = {javascriptDescription.image} description = {javascriptDescription.description} link='/JS-game'/>
         </div>
     )
 }

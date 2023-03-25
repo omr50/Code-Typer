@@ -219,7 +219,11 @@ useEffect(() => {
             setTimerStarted(true)
         }
       if (!(event.key in keys) && event.key.length === 1){
-        if (!(newLineIf.has(pythonCode[userInput.length-1]))){
+        if (event.key === "'" || event.key === '/'){
+          event.preventDefault();
+          setUserInput(userInput + event.key)
+        }
+        else if (!(newLineIf.has(pythonCode[userInput.length-1]))){
             const newInput = userInput + event.key;
             setUserInput(newInput);
         }

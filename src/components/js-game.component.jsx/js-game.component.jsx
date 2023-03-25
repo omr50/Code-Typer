@@ -5,7 +5,17 @@ import { useNavigate } from 'react-router-dom';
 const API_URL = 'https://api.api-ninjas.com/v1/quotes/?category=';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-
+const pyLibraries = [
+    "import axios from 'axios'",
+    "import moment from 'moment'",
+    "import lodash from 'lodash'",
+    "import jQuery from 'jquery'",
+    "import uuid from 'uuid'",
+    "import crypto from 'crypto'",
+    "import fs from 'fs'",
+    "import path from 'path'",
+    "import os from 'os'"
+  ]
 const keys = {
     'Shift': '',
     'Tab' : '',
@@ -62,7 +72,7 @@ const config = {
   }
 };
 
-function CppGame() {
+function JSGame() {
   const navigate = useNavigate();
   const [quote, setQuote] = useState('')
   const [word, setWord] = useState('')
@@ -75,39 +85,44 @@ function CppGame() {
   const [userInput, setUserInput] = useState('')
   const styles1 = {backgroundColor:'gray'}
   const [timerStarted, setTimerStarted] = useState(false)
-  const [mistakes, setMistakes] = useState('')
-  const [cppCode, setCppCode] = useState('');
+  const [jsCode, setjsCode] = useState('');
   const [indexBy, setIndexBy] = useState(0);
   const newLineIf = new Set(['{', '}', ';', '>'])
     const generateCode = () => {
       // Declare some random variables
       const wordsArray = word.split(" ");
-      const numVars = Math.floor(Math.random() * 3) + 1;
+      const numVars = Math.floor(Math.random() * 3) + 2;
       const varNames = [];
       for (let i = 0; i < numVars; i++) {
         varNames.push(`${wordsArray[i]}`);
       }
-      const lib = ['<iostream>', '<vector>', '<string>', '<algorithm>', '<map>', '<boost/filesystem.hpp>', '<opencv2/core.hpp>', '<QtNetwork/QHttp>', '<Eigen/Dense>', '<Poco/Net/HTTPClientSession.h>']
-      const library = lib[Math.floor(Math.random() * 10)]
-      const varDeclarations1 = (varNames.map((name) => `int ${name} = ${Math.floor(Math.random() * 100)}; `).join(''));
+      const types = ['let', 'const']
+      const varDeclarations1 = (varNames.map((name) => `${types[Math.floor(Math.random() * 2)]} ${name} = ${Math.floor(Math.random() * 100)}; `).join(''));
       const varDeclarations = varDeclarations1.substring(0, varDeclarations1.length-1)
+      const arr = varDeclarations.split(' ')
       // Define a random function
-      const funcName = Math.random() < 0.5 ? '' : wordsArray[Math.floor(Math.random() * 3) + 1];
-      const funcDefinition = funcName
-        ? `int ${funcName}(int x, int y) { return x * y / ${Math.floor(Math.random() * 10)}; }`
-        : '';
-  
+      const alphabet = "abcdefghijklmnopqrstuvwxyz"
+      const funcName = wordsArray[Math.floor(Math.random() * 3) + 1];
+      const var1 = wordsArray[Math.floor(Math.random() * 38) + 1];
+      const var2 = wordsArray[Math.floor(Math.random() * 38) + 1];
+      const funcDefinition = `function ${funcName}(${var1}, ${var2}) { this.${varNames[0]} = ${var1}; this.${varNames[1]} = ${var2}; console.log(${varNames[0]} + ${varNames[1]}); } `;
+      const class1 = `class ${wordsArray[Math.floor(Math.random() * 38) + 1]} {`
+      const tags = ['a', 'body', 'div', 'span', 'img']
+      const dom = `document.querySelector('${tags[Math.floor(Math.random() * 5)]}');`
+      const domCreate = `document.createElement('${tags[Math.floor(Math.random() * 5)]}');`
+      const ternary = `${wordsArray[Math.floor(Math.random() * 38) + 1]} = ${wordsArray[Math.floor(Math.random() * 38) + 1]} ? ${Math.floor(Math.random() * 38) + 1} : ${Math.floor(Math.random() * 38) + 1};`;
+      const extra = [dom, domCreate, ternary]
+      const first = Math.floor(Math.random() * 3);
+      const second = (first + 1) % 3;
+      const third = (first + 2) % 3;
       // Generate some random code statements
-      const numStatements = Math.floor(Math.random() * 3) + 2;
-      const statements = [];
-      for (let i = 0; i < numStatements; i++) {
-        statements.push(`cout << "${wordsArray[Math.floor(Math.random() * 38) + 1]}: " << ${wordsArray[Math.floor(Math.random() * 38) + 1]} << endl; `);
-      }
-      const codeStatements = statements.join('');
+      
       // Combine the code elements into a complete C++ program
-      const codeTemplate = `#include ${library} using namespace std; ${varDeclarations} ${funcDefinition} int main() { ${codeStatements}return 0; }`;
+      const JavaLib1 = Math.floor(Math.random() * 8);
+      const JavaLib2 = (JavaLib1 + 1) % 8;
+      const codeTemplate = `${pyLibraries[JavaLib1]}; ${pyLibraries[JavaLib2]}; ${extra[first]} ${class1} ${varDeclarations} ${funcDefinition} } ${extra[second]} ${extra[third]}`;
 
-      setCppCode(codeTemplate);
+      setjsCode(codeTemplate);
     };
   
   useEffect(()=> {
@@ -171,13 +186,17 @@ useEffect(() => {
       }
   }, [selectedMode, quote, word])
 
-  useEffect(()=>{  if (userInput.length > 0 && newLineIf.has(cppCode[userInput.length-2])){
-    setIndexBy(userInput.length)
+  useEffect(()=>{  if (userInput.length > 0 && newLineIf.has(jsCode[userInput.length-2])){
+    if (jsCode[userInput.length] === '-')
+        setIndexBy(userInput.length+1)
+    else
+        setIndexBy(userInput.length)
     }
     },[userInput])
 
   useEffect(() => {
-    
+    // this skips the semi colons which are just
+    // used to control the split to new line.
     const handleKeyDown = (event) => {
         if (timer === 0){
             setTimerStarted(true)
@@ -187,7 +206,7 @@ useEffect(() => {
           event.preventDefault();
           setUserInput(userInput + event.key)
         }
-        else if (!(newLineIf.has(cppCode[userInput.length-1]))){
+        else if (!(newLineIf.has(jsCode[userInput.length-1]))){
             const newInput = userInput + event.key;
             setUserInput(newInput);
         }
@@ -197,11 +216,11 @@ useEffect(() => {
           if (indexBy < userInput.length)
             setUserInput(userInput.substring(0, userInput.length-1))
         }
-        else if (event.key == 'Enter' && newLineIf.has(cppCode[userInput.length-1])){
+        else if (event.key == 'Enter' && newLineIf.has(jsCode[userInput.length-1])){
             let i = userInput.length;
             let totalStr = '';
-            while (cppCode[i] && !(cppCode[i].match(/[a-z]/i) || newLineIf.has(cppCode[i]))){
-                totalStr+= cppCode[i];
+            while (jsCode[i] && !(jsCode[i].match(/[a-z]/i) || newLineIf.has(jsCode[i]))){
+                totalStr+= jsCode[i];
                 i++;
             }
             setUserInput(userInput + totalStr);
@@ -220,8 +239,8 @@ useEffect(() => {
     };
   }, [userInput, indexBy]); 
 
-  const length = Math.max(output.length, cppCode.length);
-  if (userInput.length != cppCode.length || timer === 0)
+  const length = Math.max(output.length, jsCode.length);
+  if (userInput.length != jsCode.length || timer === 0)
   return (
     <div>
         <div style={{display:'flex', justifyContent: 'center' }}>
@@ -229,10 +248,10 @@ useEffect(() => {
             <div className='options-item'>Options</div>
             <div className='timer-item'>Timer: {timer}s</div>
             <div className='reset-item' onClick={()=>{
-                setTimer(0)
-                setUserInput('')
-                setTimerStarted(false);
-                generateCode();
+                    setTimer(0)
+                    setUserInput('')
+                    setTimerStarted(false);
+                    generateCode();
                 }}>Reset</div>
         </div>
         </div>
@@ -242,19 +261,21 @@ useEffect(() => {
                 {/* figure out how to add cursor as well in this case. */}
                 {Array.from({ length }).map((_, index) => {
                 const newIndex = index + indexBy;
-                if (newIndex < cppCode.length){
-                const char1 = cppCode.charAt(newIndex);
+                if (newIndex < jsCode.length){
+                const char1 = jsCode.charAt(newIndex);
                 const char2 = userInput.charAt(newIndex);
                 const color = char1 === char2 ? '#00ff00 ' : (char2 ? '#ff6347' : 'white');
                 const className = ((!char2 && userInput.charAt(newIndex-1)) || (newIndex===0 && !char2)) ? 'text-cursor' : '';
-                const enter = (newLineIf.has(cppCode.charAt(newIndex)) && (!char2 && userInput.charAt(newIndex-1)) || (newIndex===0 && !char2)) ? ' ' : '';
+                const enter = (newLineIf.has(jsCode.charAt(newIndex)) && (!char2 && userInput.charAt(newIndex-1)) || (newIndex===0 && !char2)) ? ' ' : '';
                 
                 return (
                     <span>
-                      {(cppCode[newIndex+3] && (cppCode.substring(newIndex, newIndex+4) == 'cout' || cppCode.substring(newIndex, newIndex+3) == 'ret')) ? <span>&emsp;&emsp;</span> : ''}
+                      {((jsCode[newIndex+7] && jsCode.substring(newIndex-1, newIndex) != '(' && jsCode.substring(newIndex-2, newIndex-1) != ',' && jsCode.substring(newIndex-2, newIndex) != 'pr') && (jsCode.substring(newIndex+6, newIndex+8) == '+=' || jsCode.substring(newIndex, newIndex+7) == 'System.' || jsCode.substring(newIndex, newIndex+4) == 'let ' || jsCode.substring(newIndex, newIndex+5) == 'char ' || jsCode.substring(newIndex, newIndex+6) == 'const ' || jsCode.substring(newIndex, newIndex+5) == 'void ' || jsCode.substring(newIndex, newIndex+7) == 'functio' || jsCode.substring(newIndex, newIndex+5) == 'this.'|| jsCode.substring(newIndex, newIndex+7) == 'console')) ? <span>&emsp;&emsp;</span> : ''}
+                      {((jsCode[newIndex+7] && jsCode.substring(newIndex-1, newIndex) != '(' && jsCode.substring(newIndex-2, newIndex-1) != ',' && jsCode.substring(newIndex-2, newIndex) != 'pr') && (jsCode.substring(newIndex, newIndex+7) == 'console' || jsCode.substring(newIndex, newIndex+5) == 'this.')) ? <span>&emsp;&emsp;</span> : ''}
                 {!(newLineIf.has(char1)) ?
                 <span key={index} style={{ color, position: 'relative ' }} className={className}>
-                    {newLineIf.has(cppCode.charAt(newIndex-1)) && (!char2 && userInput.charAt(newIndex-1)) ? <span style={{position:'relative'}}><span style={{position:'absolute', left:'-50px'}}>{String.fromCharCode(0x2192)}</span></span> : ''}{char1}
+                    {newLineIf.has(jsCode.charAt(newIndex-1)) && (!char2 && userInput.charAt(newIndex-1)) ? <span style={{position:'relative'}}><span style={{position:'absolute', left:'-50px'}}>{String.fromCharCode(0x2192)}</span></span> : ''}{char1}
+                    
                 </span>
                 :
                 <span key={index} style={{ color, position: 'relative ' }} className={className}>
@@ -269,16 +290,22 @@ useEffect(() => {
     </div>
   );
 
-  else if (cppCode.length <= userInput.length && timer != 0)
+  else if (jsCode.length <= userInput.length && timer != 0)
   {
     // count mistakes first then navigate to the page.
     let totalMistakes = 0;  
     for (let i = 0; i < userInput.length; i++){
-        if (userInput[i] != cppCode[i])
+        if (userInput[i] != jsCode[i])
             totalMistakes++;
     }
-    navigate(`/Cpp-game/${timer}/${cppCode.length}/${totalMistakes}`)
+    navigate(`/JS-game/${timer}/${jsCode.length}/${totalMistakes}`)
   }
 }
 
-export default CppGame;
+export default JSGame;
+
+// Java is pretty much done unless an error is discovered. TODO: make sure that
+// CPP has a proper reset. Then implement JS and we should be done. ALSO make sure
+// that the end screen buttons take back to the proper language. Not to python
+// each time.
+// EXTRA YOU CAN ADD AN "unable to get accurate wpm" if the mistakes are a lot.

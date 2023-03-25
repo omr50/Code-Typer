@@ -156,7 +156,7 @@ function JSGame() {
       // Set the filtered words in state
       setWord(filteredWords);
     } catch (error) {
-      console.error(error);
+      console.error('error');
     }
   };
 

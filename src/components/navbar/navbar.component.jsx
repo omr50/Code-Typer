@@ -13,15 +13,15 @@ const Navigationbar = () => {
     <Navbar className='nav-head' expand="lg">
       <Container>
         <LinkContainer to='/'>
-          <Navbar.Brand href="#home">Code Typer</Navbar.Brand>
+          <Navbar.Brand href="#home" className='navig-title'>Code<span className='title-animation'>/</span>Typer</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <LinkContainer to='/text-type'>
-              <Nav.Link>Text</Nav.Link>
+              <Nav.Link className='navig-link'>Text</Nav.Link>
             </LinkContainer>
-            <NavDropdown title="Languages" id="basic-nav-dropdown">
+            <NavDropdown className='navig-link' title="Languages" id="basic-nav-dropdown" style={{fontSize:'15px', fontFamily:"font-family: 'Poppins', sans-serif"}}>
               <LinkContainer to='/Cpp-game'>
                 <NavDropdown.Item href="#action/3.1">C++</NavDropdown.Item>
               </LinkContainer>

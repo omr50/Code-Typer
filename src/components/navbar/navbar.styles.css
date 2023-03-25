@@ -1,3 +1,51 @@
 .nav-head {
     background-color: #e5e5e5 !important;
 }
+
+.navig-title{
+    font-family: 'Cascadia Code', monospace;
+    color: rgb(54, 93, 7) !important;
+    font-size: 30px !important;
+    font-weight: 600;
+    padding: 0px !important;
+    margin-left: 0px !important;
+}
+
+.nav-link {
+    position: relative;
+  }
+
+.navig-link {
+    font-size: 18px !important;
+}
+  
+  .navig-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    transition: width 0.5s ease-in-out;
+  }
+  
+  .navig-link:hover::after {
+    width: 100%;
+  }
+
+  .title-animation {
+    animation: load-blink 1s infinite;
+  }
+
+  @keyframes load-blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

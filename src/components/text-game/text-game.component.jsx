@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 const API_URL = 'https://api.api-ninjas.com/v1/quotes/?category=';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-console.log(API_KEY)
 
 const keys = {
     'Shift': '',
@@ -103,7 +102,7 @@ function TextGame() {
       // Set the filtered words in state
       setWord(filteredWords);
     } catch (error) {
-      console.error('error');
+      console.error(error);
     }
   };
 

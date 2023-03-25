@@ -108,7 +108,6 @@ function TextGame() {
 
   const fetchQuote = () => {
     const category = categories[Math.floor(Math.random() * categories.length)];
-    console.log(API_URL+category, config)
     axios.get(API_URL+category, config)
       .then(response => {
         setQuote(response.data[0].quote)

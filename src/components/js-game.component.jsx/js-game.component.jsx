@@ -120,7 +120,7 @@ function JSGame() {
       // Combine the code elements into a complete C++ program
       const JavaLib1 = Math.floor(Math.random() * 8);
       const JavaLib2 = (JavaLib1 + 1) % 8;
-      const codeTemplate = `${pyLibraries[JavaLib1]}; ${pyLibraries[JavaLib2]}; ${extra[first]} ${class1} ${varDeclarations} ${funcDefinition} } ${extra[second]} ${extra[third]}`;
+      const codeTemplate = `${pyLibraries[JavaLib1]}; ${pyLibraries[JavaLib2]}; ${extra[first]} ${class1} ${varDeclarations} ${funcDefinition}} ${extra[second]} ${extra[third]}`;
 
       setjsCode(codeTemplate);
     };

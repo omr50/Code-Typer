@@ -96,21 +96,18 @@ function TextGame() {
       // another option: https://random-word-api.herokuapp.com/word?number=50&length=5
       const response = await fetch('https://random-word-api.vercel.app/api?words=40&length=5');
       const words = await response.json();
-        console.log(words)
       // Filter out vulgar words and words with more than 6 characters
       const filteredWords = words.join(' ');
-      console.log("filtered" + filteredWords)
         
       // Set the filtered words in state
       setWord(filteredWords);
     } catch (error) {
-      console.error(error);
+      console.error('error');
     }
   };
 
   const fetchQuote = () => {
     const category = categories[Math.floor(Math.random() * categories.length)];
-    console.log(category)
     axios.get(API_URL+category, config)
       .then(response => {
         setQuote(response.data[0].quote)
@@ -154,7 +151,6 @@ useEffect(() => {
   useEffect(() => {
     const handleKeyDown = (event) => {
         if (timer === 0){
-            console.log('worked')
             setTimerStarted(true)
         }
       if (!(event.key in keys)){
@@ -166,7 +162,6 @@ useEffect(() => {
             setUserInput(userInput.substring(0, userInput.length-1))
         }
       }
-      console.log(event.key + "totals: " + userInput);
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -199,7 +194,6 @@ useEffect(() => {
                 setTimer(0)
                 setUserInput('')
                 setTimerStarted(false);
-                console.log("WPM: ",userInput.length, output.length)
 
                 }}>Reset</div>
         </div>
